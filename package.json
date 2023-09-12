@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@trpc/client": "^10.38.2",
+    "@trpc/server": "^10.38.2",
+    "drizzle-orm": "^0.28.6",
+    "postgres": "^3.3.5",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "drizzle-kit": "^0.19.13",
+    "prettier": "^3.0.3"
+  },
+  "module": "index.ts",
+  "name": "trpc-backend",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "dev:client": "bun --watch src/client/index.ts",
+    "dev:server": "bun --watch src/server/index.ts",
+    "fmt": "prettier --write . && prettier --check .",
+    "migrate": "drizzle-kit generate:pg",
+    "push": "drizzle-kit push:pg"
+  },
+  "type": "module"
+}
