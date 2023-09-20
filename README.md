@@ -12,6 +12,12 @@ To run:
 # For server
 bun dev:server
 
+# Create a db and put the db string in the .env file
+cp .env.example .env
+
+# Pushing the migration to the db
+bun push
+
 # For client
 bun dev:client
 ```

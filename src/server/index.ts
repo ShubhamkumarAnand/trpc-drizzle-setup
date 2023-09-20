@@ -34,6 +34,25 @@ export const appRouter = router({
         .returning()
       return user
     }),
+  updateUser: publicProcedure
+    .input(z.object({
+      id: z.string(),
+      email: z.string().includes('@'),
+      password: z.string().min(8)
+    }))
+    .mutation(async (opts) => {
+      const { input } = opts
+      const hashPassword = await Bun.password.hash(input.password)
+      const user = await db.update(users).set({
+        email: input.email,
+        password: hashPassword
+      })
+        .where(eq(users.id, +input.id))
+        .returning({ updatedId: users.id })
+
+      return user;
+    })
+  ,
   removeUser: publicProcedure
     .input(z.string())
     .query(async (opts) => {
